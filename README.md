@@ -1,5 +1,5 @@
 # Metagenomics-Assembly
-Docker image for Metagenomics Bioinformatics Assembly session.
+Docker files for Metagenomics Bioinformatics Assembly session.
 
 ## To run the container for the first time with generic graphics:
 ```
