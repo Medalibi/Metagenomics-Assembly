@@ -100,6 +100,7 @@ RUN tar xvf /usr/local/metabat-static-binary-linux-x64_v2.12.1.tar.gz -C /usr/lo
     && ln -s /usr/local/metabat/metabat* /usr/local/bin/ \
     && ln -s /usr/local/metabat/runMetaBat.sh /usr/local/bin/ \
     && ln -s /usr/local/metabat/*.pl /usr/local/bin/ \
+    && ln -s /usr/local/metabat/jgi_summarize_bam_contig_depths /usr/local/bin/ \
     && rm /usr/local/metabat-static-binary-linux-x64_v2.12.1.tar.gz
 
 ## Install SPAdes
@@ -119,7 +120,7 @@ RUN tar xvf /usr/local/newick-utils-1.6-Linux-x86_64-enabled-extra.tar.gz -C /us
     && ./configure \
     && make \
     && make install \
-    && ln -s /usr/local/newick-utils-1.6/src/nw_* /usr/local/bin/; exit 0 \
+    && ln -s /usr/local/newick-utils-1.6/src/* /usr/local/bin/; exit 0 \
     && rm /usr/local/newick-utils-1.6-Linux-x86_64-enabled-extra.tar.gz
 
 ## Install hmmer
