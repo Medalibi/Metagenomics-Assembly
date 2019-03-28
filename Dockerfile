@@ -119,7 +119,6 @@ RUN tar xvf /usr/local/newick-utils-1.6-Linux-x86_64-enabled-extra.tar.gz -C /us
     && cd /usr/local/newick-utils-1.6 \
     && ./configure \
     && make \
-    && make check \
     && make install \
     && export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib \
     && echo "export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib" >> /etc/bash.bashrc \
