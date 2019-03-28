@@ -119,8 +119,11 @@ RUN tar xvf /usr/local/newick-utils-1.6-Linux-x86_64-enabled-extra.tar.gz -C /us
     && cd /usr/local/newick-utils-1.6 \
     && ./configure \
     && make \
+    && make check \
     && make install \
-    && ln -s /usr/local/newick-utils-1.6/src/* /usr/local/bin/; exit 0 \
+    && export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib \
+    && echo "export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib" >> /etc/bash.bashrc \
+    && sudo ldconfig \
     && rm /usr/local/newick-utils-1.6-Linux-x86_64-enabled-extra.tar.gz
 
 ## Install hmmer
