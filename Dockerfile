@@ -52,7 +52,7 @@ RUN apt-get update; apt-get install -y build-essential ca-certificates libbz2-de
 ## Install packages available on default OS repo
 ########
 RUN apt update && apt install -y bwa prodigal \
-    && pip install -U numpy bcbio-gff cython scipy biopython pandas scikit-learn checkm-genome \
+    && pip install -U numpy bcbio-gff cython scipy biopython pandas scikit-learn checkm-genome refinem \
     && sed -i 's/srv\/whitlam\/bio\/db\/checkm_data\/1.0.0/data\/checkm_data/g' /usr/local/lib/python2.7/dist-packages/checkm/DATA_CONFIG \
     && rm -rf /var/lib/apt/lists/* \
     && apt -y autoremove && apt autoclean && rm -rf /var/lib/apt/lists/*
