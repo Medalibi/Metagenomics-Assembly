@@ -20,7 +20,7 @@
 # docker push ebitraining/metagenomics:assembly
 #
 #########
-FROM ubuntu:18.04
+FROM openjdk:8
 LABEL author="Mohamed Alibi" \
 description="Docker image for Metagenomics Bioinformtics Assembly session." \
 maintainer="Mohamed Alibi <alibi@ebi.ac.uk>"
@@ -35,17 +35,15 @@ RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 
 RUN apt-get update \
     && apt-get -y upgrade \
-    && apt-get install -y --reinstall language-pack-en \
-    && apt-get install -y gnupg \
-    && locale-gen en_GB.UTF-8
+    && apt-get install -y gnupg 
 
 RUN apt-get update; apt-get install -y build-essential ca-certificates libbz2-dev liblzma-dev gfortran \
-    libncurses5-dev libncursesw5-dev zlib1g-dev automake pkg-config unzip openjdk-8-jre-headless curl \
-    git wget sudo autoconf make xml2 locales libjpeg-dev zlibc libjpeg62 libxslt1.1 nano openjdk-8-jre \
+    libncurses5-dev libncursesw5-dev zlib1g-dev automake pkg-config unzip curl \
+    git wget sudo autoconf make xml2 locales libjpeg-dev zlibc libjpeg62 libxslt1.1 nano \
     libxcomposite1 libtiff5 libssl-dev python3 python3-dev mesa-common-dev tar python-dev sudo mercurial \
     libcurses-ocaml-dev libgl1-mesa-dri libgl1-mesa-glx mesa-utils fcitx-frontend-qt5 libqt5gui5 openjfx \
-    fcitx-modules fcitx-module-dbus libedit2 libxml2-dev default-jre default-jre-headless python sqlite3 \
-    python3-pip python-pip libgsl-dev libcurl4 libcurl4-openssl-dev cmake \
+    fcitx-modules fcitx-module-dbus libedit2 libxml2-dev python sqlite3 libcanberra-gtk-module \
+    python3-pip python-pip libgsl-dev libcurl4-openssl-dev cmake \
     && update-alternatives --set java /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java \
     && echo "en_GB.UTF-8 UTF-8" >> /etc/locale.gen \
     && locale-gen en_GB.utf8 \
@@ -55,6 +53,7 @@ RUN apt-get update; apt-get install -y build-essential ca-certificates libbz2-de
 ########
 RUN apt update && apt install -y bwa prodigal \
     && pip install -U numpy bcbio-gff cython scipy biopython pandas scikit-learn checkm-genome \
+    && sed -i 's/srv\/whitlam\/bio\/db\/checkm_data\/1.0.0/data\/checkm_data/g' /usr/local/lib/python2.7/dist-packages/checkm/DATA_CONFIG \
     && rm -rf /var/lib/apt/lists/* \
     && apt -y autoremove && apt autoclean && rm -rf /var/lib/apt/lists/*
 
@@ -160,12 +159,12 @@ RUN tar xvf /usr/local/bedtools-2.27.1.tar.gz -C /usr/local/ \
 
 ## Install FigTree
 ########
-COPY ./FigTree_v1.4.3.tgz /usr/local/FigTree_v1.4.3.tgz
-RUN tar xvf /usr/local/FigTree_v1.4.3.tgz -C /usr/local/ \
-    && chmod 777 -R /usr/local/FigTree_v1.4.3 \
-    && sed -i 's/lib\/figtree.jar/\/usr\/local\/FigTree_v1.4.3\/lib\/figtree.jar/g' /usr/local/FigTree_v1.4.3/bin/figtree \
-    && ln -s /usr/local/FigTree_v1.4.3/bin/figtree /usr/local/bin/ \
-    && rm /usr/local/FigTree_v1.4.3.tgz
+COPY ./FigTree_v1.4.4.tgz /usr/local/FigTree_v1.4.4.tgz
+RUN tar xvf /usr/local/FigTree_v1.4.4.tgz -C /usr/local/ \
+    && chmod 777 -R /usr/local/FigTree_v1.4.4 \
+    && sed -i 's/lib\/figtree.jar/\/usr\/local\/FigTree_v1.4.4\/lib\/figtree.jar/g' /usr/local/FigTree_v1.4.4/bin/figtree \
+    && ln -s /usr/local/FigTree_v1.4.4/bin/figtree /usr/local/bin/ \
+    && rm /usr/local/FigTree_v1.4.4.tgz
 
 ## Install Megahit
 ########
